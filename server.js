@@ -28,6 +28,14 @@ app.post('/api/data', (req, res) => {
     res.json({ message: 'Data has been saved successfully!' });
 });
 
+
+// Authentication
+app.post('/api/auth', (req, res) => {
+    console.info("AUTH CALLED!");
+
+    res.json({ message: 'Authentication called!' });
+});
+
 // Serve the HTML file
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));

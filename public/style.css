@@ -177,7 +177,7 @@ nav ul li a:hover::after {
   font-family: sans-serif;
   text-align: center;
   color: rgb(11, 183, 71);
-  font-size: 22px;
+  font-size: 16px;
   background-color: #fff;
   border-radius: 10px;
   margin: 2px;
@@ -188,6 +188,7 @@ nav ul li a:hover::after {
 .form input {
   width: 240px;
   height: 35px;
+  padding-left: 1rem;
   background: transparent;
   border-bottom: 1px solid rgb(11, 183, 71);
   border-top: none;
@@ -248,9 +249,9 @@ nav ul li a:hover::after {
 }
 
 .icons {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .icons a {
