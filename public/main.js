@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const plantName = document.getElementById('plantInput').value;
 
         try {
-            const responseData = await postData('http://localhost:3000/api/auth', { plantName, password });
+            const responseData = await postData('/api/auth', { plantName, password });
             alert('Response from the server: '+ responseData.message);
         } catch (error) {
             console.error('Error:', error);
