@@ -2,12 +2,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const loginButton = document.getElementById('loginButton');
 
     loginButton.addEventListener('click', async () => {
+        const username = document.getElementById('usernameInput').value;
         const password = document.getElementById('passwordInput').value;
-        const plantName = document.getElementById('plantInput').value;
 
         try {
-            const responseData = await postData('/api/auth', { plantName, password });
-            alert('Response from the server: '+ responseData.message);
+            const responseData = await postData('/api/auth', { username, password });
+            console.log(responseData);
+            if(responseData.status === 200){
+               location.href = 'admin/admin.html';
+            } else {
+                alert('You are not authorized to login!');
+            }
         } catch (error) {
             console.error('Error:', error);
         }
@@ -21,10 +26,6 @@ async function postData(url, data) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         });
-
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
 
         return response.json();
     } catch (error) {

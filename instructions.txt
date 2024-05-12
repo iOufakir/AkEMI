@@ -1,9 +1,11 @@
 1- Navigate to the Project Directory: cd nodejs-app
 
-2- Install Dependencies: npm install
+2- npm install dotenv mysql2
+
+3- Install Dependencies: npm install
 
 3- Start the Server: npm start
 
-4- Access the app: 
+5- Access the app: 
     + Client side: http://localhost:3000
     + Example of: Web service backend endpoint: http://localhost:3000/api/data

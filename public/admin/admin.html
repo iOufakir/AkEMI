@@ -4,26 +4,25 @@
 <head>
     <meta name="viewport" content="with=device-width,initial-scale=1.0">
 
-    <title>AkEMI</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Admin - AkEMI</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="admin.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
     <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
-    <script src="main.js"></script>
 </head>
 
 <body>
-    <div class="all">
+    <div>
         <div class="hero">
             <nav>
-                <a href="#" alt="logo"><img src="images/logo (2).png" class="logo"></a>
+                <a href="#" alt="logo"><img src="../images/logo (2).png" class="logo"></a>
+
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#service">Service</a></li>
+                    <li><a href="../index.html">Home</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
                 <div>
@@ -34,72 +33,60 @@
         </div>
 
         <div class="content">
-            <h1>Beautiful Growth,<br /><span>Naturally</span> <br>Elevated</h1>
-            <p class="par"><b>AKEMI:</b>A remotely controlled aeroponic system ,<br> Offers a modern and efficient
-                method of growing plants,<br>Allowing farmers to monitor and regulate growing conditions remotely <br>to
-                optimize crop yields and quality.</p>
 
-            <button class="cn"><a href="#">Start</a></button>
+            <div id="addPlantModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Add a Plant</h2>
+                    <form id="addPlantForm" action="/addPlant" method="POST">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Enter plant name" required><br>
 
-            <div class="form">
-                <h2>Login</h2>
-                <input id="usernameInput" type="text" name="Plant" placeholder="Enter Username">
-                <input id="passwordInput" type="password" name="password" placeholder="Enter Password">
-                <button id="loginButton" class="btnn" type="submit"><a href="#">Log in</a></button>
+                        <label for="growing_season">Growing Season</label>
+                        <input type="text" id="growing_season" name="growing_season" placeholder="Enter season"
+                            required><br>
 
-                <p class="link">Don't have an account<br>
-                    <a href="#"> Sign up </a> here</a>
-                </p>
-                <hr />
-                <p class="liw">Log in with</p>
+                        <label for="light_requirement">Light Requirement</label>
+                        <input type="text" id="light_requirement" name="light_requirement" placeholder="Enter light"
+                            required><br>
 
-                <div class="icons">
-                    <a href="#">
-                        <ion-icon name="logo-facebook"></ion-icon>
-                    </a>
-                    <a href="#">
-                        <ion-icon name="logo-instagram"></ion-icon>
-                    </a>
-                    <a href="#">
-                        <ion-icon name="logo-twitter"></ion-icon>
-                    </a>
-                    <a href="#">
-                        <ion-icon name="logo-google"></ion-icon>
-                    </a>
+                        <label for="temperature_requirement">Temperature Requirement</label>
+                        <input type="text" id="temperature_requirement" name="temperature_requirement"
+                            placeholder="Enter temperature" required><br>
 
+                        <label for="liquid_fertilizer_need">Liquid Fertilizer Need</label>
+                        <input type="text" id="liquid_fertilizer_need" name="liquid_fertilizer_need"
+                            placeholder="Enter liquid fertilizer" required><br>
+                        <input type="submit" value="Add Plant" class="btn" />
+                    </form>
+                    <div id="successMessage" class="success-message" style="display: none;">
+                        Plant added successfully!
+                    </div>
                 </div>
             </div>
+
+            <h2>
+                Plants
+                <button id="addPlantBtn" class="btn btn-add-plant">Add Plant</button>
+            </h2>
+
+            <table id="plantTable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Growing Season</th>
+                        <th>Light Requirement</th>
+                        <th>Temperature Requirement</th>
+                        <th>Liquid Fertilizer Need</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Plants will be displayed here dynamically -->
+                </tbody>
+            </table>
 
         </div>
     </div>
-
-    <section id="about" class="plants">
-        <h1>Plants</h1>
-        <p>Elevate your plants to new heights with our aeroponic system for growing air-plants: the aerial path to a
-            bountiful and flavorful harvest!</p>
-
-        <div class="row">
-            <div class="plants-col">
-                <img src="images/aeroponic-tomato-tower-garden-2.webp">
-                <div class="layer">
-                    <h3>TOMATO</h3>
-                </div>
-            </div>
-            <div class="plants-col">
-                <img src="images/cocombre.webp">
-                <div class="layer">
-                    <h3>CUCUMBER</h3>
-                </div>
-            </div>
-            <div class="plants-col">
-                <img src="images/tower-garden-strawberry-002.webp">
-                <div class="layer">
-                    <h3>STRAWBERRY</h3>
-                </div>
-            </div>
-        </div>
-
-    </section>
 
     <section id="contact" class="contact">
         <div class="footer">
@@ -159,6 +146,7 @@
         </div>
     </section>
 
+    <script src="admin.js"></script>
 </body>
 
 </html>
