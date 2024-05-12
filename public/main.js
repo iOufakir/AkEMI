@@ -7,9 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             const responseData = await postData('/api/auth', { username, password });
-            console.log(responseData);
-            if(responseData.status === 200){
-               location.href = 'admin/admin.html';
+            if (responseData.status === 200) {
+                location.href = 'admin/admin.html';
             } else {
                 alert('You are not authorized to login!');
             }
