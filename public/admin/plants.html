@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="with=device-width,initial-scale=1.0">
+
+    <title>Plants | Admin - AkEMI</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="admin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
+</head>
+
+<body>
+    <div>
+        <div class="hero">
+            <nav>
+                <a href="#" alt="logo"><img src="../images/logo (2).png" class="logo"></a>
+
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="admin.html">Environnement</a></li>
+                    <li class="active"><a href="plants.html">Plants</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div>
+                    <a href="#" class="btn">Visit Us</a>
+                </div>
+
+            </nav>
+        </div>
+
+        <div class="content">
+            <div class="plants-content">
+                <div id="addPlantModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Add a Plant</h2>
+                        <form id="addPlantForm" action="/addPlant" method="POST">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" placeholder="Enter plant name" required><br>
+
+                            <label for="growing_season">Growing Season</label>
+                            <input type="text" id="growing_season" name="growing_season" placeholder="Enter season"
+                                required><br>
+
+                            <label for="light_requirement">Light Requirement</label>
+                            <input type="text" id="light_requirement" name="light_requirement" placeholder="Enter light"
+                                required><br>
+
+                            <label for="temperature_requirement">Temperature Requirement</label>
+                            <input type="text" id="temperature_requirement" name="temperature_requirement"
+                                placeholder="Enter temperature" required><br>
+
+                            <label for="liquid_fertilizer_need">Liquid Fertilizer Need</label>
+                            <input type="text" id="liquid_fertilizer_need" name="liquid_fertilizer_need"
+                                placeholder="Enter liquid fertilizer" required><br>
+                            <input type="submit" value="Add Plant" class="btn" />
+                        </form>
+                        <div id="successMessage" class="success-message" style="display: none;">
+                            Plant added successfully!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sensor-values">
+                    <h2>Environment state</h2>
+                    <span id="environment-name"></span>
+                    <div>
+                        <i class="fas fa-thermometer-three-quarters"></i>
+                        Temperature: <span id="temperatureValue"></span> <span class="indicator">°C</span>
+                        <span class="separator">|</span>
+                        <i class="fas fa-tint"></i>
+                        Humidity: <span id="humidityValue"></span> <span class="indicator">%</span>
+                    </div>
+                </div>
+
+                <h2>
+                    Plants
+                    <button id="addPlantBtn" class="btn btn-add-modal">Add Plant</button>
+                </h2>
+
+                <table id="plantTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Growing Season</th>
+                            <th>Light Requirement</th>
+                            <th>Temperature Requirement</th>
+                            <th>Liquid Fertilizer Need</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Plants will be displayed here dynamically -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="environment-message-error" class="error-message" style="display: none;">
+                Please add a new environment first!
+            </div>
+        </div>
+    </div>
+
+    <section id="contact" class="contact">
+        <div class="footer">
+            <h2>Contact Us</h2>
+            <p>Feel free to contact us for any questions, suggestions, or inquiries. Our team is here to assist you and
+                provide you with the information you need.</p>
+        </div>
+        <div class="container">
+            <div class="contactInfo">
+                <div class="box">
+                    <div class="icon"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+                    <div class="text">
+                        <h3>Address</h3>
+                        <p>Casablanca, Morocco</p>
+                    </div>
+                </div>
+
+
+                <div class="box">
+                    <div class="icon"><i class="fa fa-phone" aria-hidden="true"></i></div>
+                    <div class="text">
+                        <h3>Phone</h3>
+                        <p>+212 627-742-721<br>+212 600-547-139</p>
+                    </div>
+                </div>
+
+
+                <div class="box">
+                    <div class="icon"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+                    <div class="text">
+                        <h3>Email</h3>
+                        <p>hindtita2002@gmail.com<br>kawtaroufakir@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contactForm">
+                <form>
+                    <h2>Send Message</h2>
+                    <div class="inputBox">
+                        <input type="text" name="" required="required">
+                        <span>Full Name</span>
+                    </div>
+                    <div class="inputBox">
+                        <input type="text" name="" required="required">
+                        <span>Email</span>
+                    </div>
+                    <div class="inputBox">
+                        <textarea required="required"></textarea>
+                        <span>Type your Message...</span>
+                    </div>
+                    <div class="inputBox">
+                        <input type="submit" name="" value="Send">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script src="plants.js"> </script>
+
+</body>
+
+</html>

@@ -9,10 +9,9 @@
     <link rel="stylesheet" href="admin.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
 
-    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -20,9 +19,10 @@
         <div class="hero">
             <nav>
                 <a href="#" alt="logo"><img src="../images/logo (2).png" class="logo"></a>
-
                 <ul>
                     <li><a href="../index.html">Home</a></li>
+                    <li class="active"><a href="admin.html">Environnement</a></li>
+                    <li><a href="plants.html">Plants</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
                 <div>
@@ -33,58 +33,43 @@
         </div>
 
         <div class="content">
-
-            <div id="addPlantModal" class="modal">
+            <div id="addEnvironmentModal" class="modal">
                 <div class="modal-content">
                     <span class="close">&times;</span>
-                    <h2>Add a Plant</h2>
-                    <form id="addPlantForm" action="/addPlant" method="POST">
+                    <h2>Add a new environment</h2>
+                    <form id="addEnvironmentForm" action="/addEnvironment" method="POST">
                         <label for="name">Name</label>
-                        <input type="text" id="name" name="name" placeholder="Enter plant name" required><br>
-
-                        <label for="growing_season">Growing Season</label>
-                        <input type="text" id="growing_season" name="growing_season" placeholder="Enter season"
+                        <input type="text" id="environment-name" name="name" placeholder="Enter environment name"
                             required><br>
 
-                        <label for="light_requirement">Light Requirement</label>
-                        <input type="text" id="light_requirement" name="light_requirement" placeholder="Enter light"
-                            required><br>
-
-                        <label for="temperature_requirement">Temperature Requirement</label>
-                        <input type="text" id="temperature_requirement" name="temperature_requirement"
-                            placeholder="Enter temperature" required><br>
-
-                        <label for="liquid_fertilizer_need">Liquid Fertilizer Need</label>
-                        <input type="text" id="liquid_fertilizer_need" name="liquid_fertilizer_need"
-                            placeholder="Enter liquid fertilizer" required><br>
-                        <input type="submit" value="Add Plant" class="btn" />
+                        <input type="submit" value="Add" class="btn" />
                     </form>
                     <div id="successMessage" class="success-message" style="display: none;">
-                        Plant added successfully!
+                        Environment name added successfully!
                     </div>
                 </div>
             </div>
 
             <h2>
-                Plants
-                <button id="addPlantBtn" class="btn btn-add-plant">Add Plant</button>
+                Environments
+                <button id="addEnvironmentBtn" class="btn btn-add-modal">Add a new environment</button>
             </h2>
 
-            <table id="plantTable">
+            <table id="environmentTable" class="mb-4">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Growing Season</th>
-                        <th>Light Requirement</th>
-                        <th>Temperature Requirement</th>
-                        <th>Liquid Fertilizer Need</th>
+                        <th><i class="fab fa-envira"></i>Name</th>
+                        <th><i class="fas fa-thermometer-three-quarters"></i>
+                            Temperature</th>
+                        <th><i class="fas fa-tint"></i>Humidity</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Plants will be displayed here dynamically -->
                 </tbody>
             </table>
 
+            <h2>Current chart</h2>
+            <canvas id="myChart"></canvas>
         </div>
     </div>
 
@@ -115,7 +100,7 @@
 
 
                 <div class="box">
-                    <div class="icon"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>
+                    <div class="icon"><i class="fa fa-envelope" aria-hidden="true"></i></div>
                     <div class="text">
                         <h3>Email</h3>
                         <p>hindtita2002@gmail.com<br>kawtaroufakir@gmail.com</p>

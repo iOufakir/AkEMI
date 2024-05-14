@@ -9,3 +9,6 @@
 5- Access the app: 
     + Client side: http://localhost:3000
     + Example of: Web service backend endpoint: http://localhost:3000/api/data
+
+6- Create a new environment first before doing a demo, create it by login first and then go to: 
+http://localhost:3000/admin/admin.html

@@ -31,24 +31,75 @@ connection.connect((err) => {
 
 /**************** Backend endpoints ****************/
 
-// To save Temperature from Arduino into the Database
-app.post('/api/data', (req, res) => {
-    const { temperature, humidity } = req.body;
 
+// To save TEMPERATURE in the Database, this one will be invoked by Arduino HTTP CALL.
+app.post('/api/environment/:environmentId/data', (req, res) => {
+    const { temperature, humidity } = req.body;
+    const { environmentId } = req.params;
     console.info('Received Temperature:', temperature);
     console.info('Received Humidity:', humidity);
 
-    res.json({ message: 'Data has been saved successfully!' });
+    const sql = 'INSERT INTO environment_data (environment_id, temperature, humidity) VALUES (?, ?, ?)';
+    const values = [environmentId, temperature, humidity];
+
+    connection.query(sql, values, (err, result) => {
+        if (err) {
+            console.error('Error inserting environment data:', err);
+            res.status(500).json({ error: 'Failed to add environment data' });
+            return;
+        }
+        res.json({ message: 'Environment data has been added successfully!' });
+    });
 });
 
-// To receive Temperature from the Database
-app.get('/api/data', (req, res) => {
-
-    console.info("THIS IS GET REQUEST");
-
-    res.json({ message: 'Backend endpoint reached!' });
+// To get TEMPERATURE from the Database
+app.get('/api/environment/:environmentId/data', (req, res) => {
+    const { environmentId } = req.params;
+    const sql = 'SELECT temperature, humidity, name FROM environment, environment_data WHERE environment_id = ?';
+    connection.query(sql, [environmentId], (err, results) => {
+        if (err) {
+            console.error('Error executing MySQL query: ' + err.stack);
+            res.status(500).json({ error: 'Failed to fetch environment data!' });
+        }
+        res.json(results);
+    });
 });
 
+// To save environment data in the Database
+app.post('/api/environment', (req, res) => {
+    const { name } = req.body;
+    const sql = 'INSERT INTO environment (user_id, name) VALUES (?, ?)';
+    //TODO: Temporary solution: just for DEMO
+    const defaultUserId = 1;
+    const values = [defaultUserId, name];
+
+    connection.query(sql, values, (err, result) => {
+        if (err) {
+            console.error('Error inserting environment data:', err);
+            res.status(500).json({ error: 'Failed to add environment' });
+            return;
+        }
+        res.json({ message: 'Environment data has been added successfully!' });
+    });
+});
+
+// To receive environment data from the Database
+app.get('/api/environment', (req, res) => {
+    const sql = `SELECT name, temperature, humidity FROM environment 
+    JOIN environment_data ON environment.id = environment_data.environment_id
+    ORDER BY environment_data.created_at DESC
+    LIMIT 1;`;
+
+    connection.query(sql, (err, results) => {
+        if (err) {
+            console.error('Error fetching environments:', err);
+            res.status(500).json({ error: 'Failed to fetch environments' });
+            return;
+        }
+
+        res.json(results);
+    });
+});
 
 // Save plant info in the database
 app.post('/api/plant', (req, res) => {
