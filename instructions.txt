@@ -1,6 +1,6 @@
 1- Navigate to the Project Directory: cd nodejs-app
 
-2- npm install dotenv mysql2
+2- npm install dotenv mysql2 body-parser compression
 
 3- Install Dependencies: npm install
 

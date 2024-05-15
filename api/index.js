@@ -1,17 +1,17 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const bodyParser = require('body-parser');
 const mysql = require('mysql2');
-
-const PORT = process.env.PORT || 3300;
+const bodyParser = require("body-parser");
+const compression = require("compression");
 
 require('dotenv').config();
 
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, '../public')));
-// Middleware to parse JSON bodies
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(compression());
 
 // Create a connection pool
 const pool = mysql.createPool({
@@ -21,7 +21,6 @@ const pool = mysql.createPool({
     password: process.env.DB_PASSWORD,
     port: process.env.DB_PORT || 3306 // Use '||' instead of '|' for default port
 });
-
 // Connect to MySQL
 pool.getConnection((err, connection) => {
     if (err) {
@@ -29,7 +28,6 @@ pool.getConnection((err, connection) => {
     }
     console.info('Connected to MySQL database successfully!');
 });
-
 
 /**************** Backend endpoints ****************/
 
@@ -87,7 +85,7 @@ app.post('/api/environment', (req, res) => {
 // To receive environment data from the Database
 app.get('/api/environment', (req, res) => {
     const sql = `SELECT name, temperature, humidity FROM environment 
-    JOIN environment_data ON environment.id = environment_data.environment_id
+    LEFT JOIN environment_data ON environment.id = environment_data.environment_id
     ORDER BY environment_data.created_at DESC
     LIMIT 1;`;
 
@@ -168,15 +166,8 @@ function authenticateUser(username, password, callback) {
     });
 }
 
-// Serve the HTML file
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
 // Start the server
+const PORT = process.env.PORT || 3002;
 app.listen(PORT, () => {
     console.info(`Server is running on port ${PORT}`);
 });
-
-
-module.exports = app;
