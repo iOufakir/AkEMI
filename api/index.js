@@ -21,13 +21,6 @@ const pool = mysql.createPool({
     password: process.env.DB_PASSWORD,
     port: process.env.DB_PORT || 3306 // Use '||' instead of '|' for default port
 });
-// Connect to MySQL
-pool.getConnection((err, connection) => {
-    if (err) {
-        throw err;
-    }
-    console.info('Connected to MySQL database successfully!');
-});
 
 /**************** Backend endpoints ****************/
 
@@ -167,7 +160,18 @@ function authenticateUser(username, password, callback) {
 }
 
 // Start the server
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
     console.info(`Server is running on port ${PORT}`);
+
+    // Connect to MySQL
+    pool.getConnection((err, connection) => {
+        if (err) {
+            throw err;
+        }
+        console.info('Connected to MySQL database successfully!');
+    });
 });
+
+// export the app for vercel serverless functions 
+module.exports = app;

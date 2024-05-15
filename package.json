@@ -1,8 +1,8 @@
 {
-  "name": "nodejs-app",
+  "name": "akemi",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "nodejs app",
+  "main": "api/index.js",
   "scripts": {
     "start": "nodemon api/index.js",
     "start-prod": "node api/index.js",
