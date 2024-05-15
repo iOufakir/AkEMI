@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3300;
 require('dotenv').config();
 
 // Serve static files from the public directory
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../public')));
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
 
@@ -43,7 +43,7 @@ app.post('/api/environment/:environmentId/data', (req, res) => {
     const sql = 'INSERT INTO environment_data (environment_id, temperature, humidity) VALUES (?, ?, ?)';
     const values = [environmentId, temperature, humidity];
 
-    connection.query(sql, values, (err, result) => {
+    pool.query(sql, values, (err, result) => {
         if (err) {
             console.error('Error inserting environment data:', err);
             res.status(500).json({ error: 'Failed to add environment data' });
@@ -57,7 +57,7 @@ app.post('/api/environment/:environmentId/data', (req, res) => {
 app.get('/api/environment/:environmentId/data', (req, res) => {
     const { environmentId } = req.params;
     const sql = 'SELECT temperature, humidity, name FROM environment, environment_data WHERE environment_id = ?';
-    connection.query(sql, [environmentId], (err, results) => {
+    pool.query(sql, [environmentId], (err, results) => {
         if (err) {
             console.error('Error executing MySQL query: ' + err.stack);
             res.status(500).json({ error: 'Failed to fetch environment data!' });
@@ -74,7 +74,7 @@ app.post('/api/environment', (req, res) => {
     const defaultUserId = 1;
     const values = [defaultUserId, name];
 
-    connection.query(sql, values, (err, result) => {
+    pool.query(sql, values, (err, result) => {
         if (err) {
             console.error('Error inserting environment data:', err);
             res.status(500).json({ error: 'Failed to add environment' });
@@ -91,7 +91,7 @@ app.get('/api/environment', (req, res) => {
     ORDER BY environment_data.created_at DESC
     LIMIT 1;`;
 
-    connection.query(sql, (err, results) => {
+    pool.query(sql, (err, results) => {
         if (err) {
             console.error('Error fetching environments:', err);
             res.status(500).json({ error: 'Failed to fetch environments' });
@@ -111,7 +111,7 @@ app.post('/api/plant', (req, res) => {
     const defaultUserId = 1;
     const values = [defaultUserId, name, growing_season, light_requirement, temperature_requirement, liquid_fertilizer_need];
 
-    connection.query(sql, values, (err, result) => {
+    pool.query(sql, values, (err, result) => {
         if (err) {
             console.error('Error inserting plant data:', err);
             res.status(500).json({ error: 'Failed to add plant' });
@@ -125,7 +125,7 @@ app.post('/api/plant', (req, res) => {
 app.get('/api/plants', (req, res) => {
     const sql = 'SELECT * FROM plant';
 
-    connection.query(sql, (err, results) => {
+    pool.query(sql, (err, results) => {
         if (err) {
             console.error('Error fetching plants:', err);
             res.status(500).json({ error: 'Failed to fetch plants' });
@@ -156,7 +156,7 @@ app.post('/api/auth', (req, res) => {
 // Function to authenticate user
 function authenticateUser(username, password, callback) {
     const sql = 'SELECT * FROM user WHERE username = ? AND password = ?';
-    connection.query(sql, [username, password], (err, results) => {
+    pool.query(sql, [username, password], (err, results) => {
         if (err) {
             return callback(err);
         }
