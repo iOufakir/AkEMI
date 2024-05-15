@@ -15,7 +15,6 @@ app.use(bodyParser.json());
 
 // Create a connection pool
 const pool = mysql.createPool({
-    connectionLimit: 10, // Adjust this value based on your application's needs
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     database: process.env.DB_NAME,
