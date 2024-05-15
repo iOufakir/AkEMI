@@ -13,25 +13,26 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Middleware to parse JSON bodies
 app.use(bodyParser.json());
 
-// Create MySQL connection
-const connection = mysql.createConnection({
+// Create a connection pool
+const pool = mysql.createPool({
+    connectionLimit: 10, // Adjust this value based on your application's needs
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     database: process.env.DB_NAME,
     password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT | 3306
+    port: process.env.DB_PORT || 3306 // Use '||' instead of '|' for default port
 });
 
 // Connect to MySQL
-connection.connect((err) => {
+pool.getConnection((err, connection) => {
     if (err) {
         throw err;
     }
     console.info('Connected to MySQL database successfully!');
 });
 
-/**************** Backend endpoints ****************/
 
+/**************** Backend endpoints ****************/
 
 // To save TEMPERATURE in the Database, this one will be invoked by Arduino HTTP CALL.
 app.post('/api/environment/:environmentId/data', (req, res) => {
