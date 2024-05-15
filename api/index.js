@@ -4,7 +4,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const mysql = require('mysql2');
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3300;
 
 require('dotenv').config();
 
