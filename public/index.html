@@ -14,7 +14,27 @@
 
     <script type="module" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule="" src="https://unpkg.com/ionicons@7.4.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+
     <script src="main.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    flexBasis: {
+                        '1/7': '14.2857143%',
+                        '2/7': '28.5714286%',
+                        '3/7': '42.8571429%',
+                        '4/7': '57.1428571%',
+                        '5/7': '71.4285714%',
+                        '6/7': '85.7142857%',
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -28,50 +48,55 @@
                     <li><a href="#service">Service</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
-                <div>
+                <div class="visitUsSection">
                     <a href="#" class="btn">Visit Us</a>
                 </div>
-
             </nav>
         </div>
 
         <div class="content">
-            <h1>Beautiful Growth,<br /><span>Naturally</span> <br>Elevated</h1>
-            <p class="par"><b>AKEMI:</b>A remotely controlled aeroponic system ,<br> Offers a modern and efficient
-                method of growing plants,<br>Allowing farmers to monitor and regulate growing conditions remotely <br>to
-                optimize crop yields and quality.</p>
+            <div class="mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 p-4">
+                <div class="">
+                    <h1>Beautiful Growth,<br /><span>Naturally</span> <br>Elevated</h1>
+                    <p class="par"><b>AKEMI:</b>A remotely controlled aeroponic system ,<br> Offers a modern and
+                        efficient
+                        method of growing plants,<br>Allowing farmers to monitor and regulate growing conditions
+                        remotely <br>to
+                        optimize crop yields and quality.</p>
 
-            <button class="cn"><a href="#">Start</a></button>
+                    <button class="cn"><a href="#">Start</a></button>
+                </div>
+                <div class="">
+                    <div class="login-form">
+                        <h2>Login</h2>
+                        <input id="usernameInput" type="text" name="Plant" placeholder="Enter Username">
+                        <input id="passwordInput" type="password" name="password" placeholder="Enter Password">
+                        <button id="loginButton" class="btnn" type="submit"><a href="#">Log in</a></button>
 
-            <div class="form">
-                <h2>Login</h2>
-                <input id="usernameInput" type="text" name="Plant" placeholder="Enter Username">
-                <input id="passwordInput" type="password" name="password" placeholder="Enter Password">
-                <button id="loginButton" class="btnn" type="submit"><a href="#">Log in</a></button>
+                        <p class="link">Don't have an account<br>
+                            <a href="#"> Sign up </a> here</a>
+                        </p>
+                        <hr />
+                        <p class="liw">Log in with</p>
 
-                <p class="link">Don't have an account<br>
-                    <a href="#"> Sign up </a> here</a>
-                </p>
-                <hr />
-                <p class="liw">Log in with</p>
+                        <div class="icons">
+                            <a href="#">
+                                <ion-icon name="logo-facebook"></ion-icon>
+                            </a>
+                            <a href="#">
+                                <ion-icon name="logo-instagram"></ion-icon>
+                            </a>
+                            <a href="#">
+                                <ion-icon name="logo-twitter"></ion-icon>
+                            </a>
+                            <a href="#">
+                                <ion-icon name="logo-google"></ion-icon>
+                            </a>
 
-                <div class="icons">
-                    <a href="#">
-                        <ion-icon name="logo-facebook"></ion-icon>
-                    </a>
-                    <a href="#">
-                        <ion-icon name="logo-instagram"></ion-icon>
-                    </a>
-                    <a href="#">
-                        <ion-icon name="logo-twitter"></ion-icon>
-                    </a>
-                    <a href="#">
-                        <ion-icon name="logo-google"></ion-icon>
-                    </a>
-
+                        </div>
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
 
