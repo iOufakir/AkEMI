@@ -47,7 +47,10 @@ app.post('/api/environment/:environmentId/data', (req, res) => {
 // To get TEMPERATURE from the Database
 app.get('/api/environment/:environmentId/data', (req, res) => {
     const { environmentId } = req.params;
-    const sql = 'SELECT temperature, humidity, name FROM environment, environment_data WHERE environment_id = ?';
+    const sql = `SELECT temperature, humidity, name 
+                FROM environment
+                INNER JOIN environment_data
+                ON environment.id = environment_id;`;
     pool.query(sql, [environmentId], (err, results) => {
         if (err) {
             console.error('Error executing MySQL query: ' + err.stack);
@@ -77,10 +80,18 @@ app.post('/api/environment', (req, res) => {
 
 // To receive environment data from the Database
 app.get('/api/environment', (req, res) => {
-    const sql = `SELECT name, temperature, humidity FROM environment 
-    LEFT JOIN environment_data ON environment.id = environment_data.environment_id
-    ORDER BY environment_data.created_at DESC
-    LIMIT 1;`;
+    const sql = `SELECT e.id, e.name, ed.temperature, ed.humidity
+    FROM environment e
+    LEFT JOIN (
+        SELECT ed1.*
+        FROM environment_data ed1
+        INNER JOIN (
+            SELECT environment_id, MAX(created_at) AS latest
+            FROM environment_data
+            GROUP BY environment_id
+        ) ed2 ON ed1.environment_id = ed2.environment_id AND ed1.created_at = ed2.latest
+    ) ed ON e.id = ed.environment_id
+    ORDER BY ed.created_at DESC;`;
 
     pool.query(sql, (err, results) => {
         if (err) {

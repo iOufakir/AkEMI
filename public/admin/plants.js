@@ -72,8 +72,9 @@ const displayPlants = async () => {
     }
 }
 
-const displayEnvironmentStates = async () => {
-    const environmentData = await getData('/api/environment/1/data');
+const displayEnvironmentStates = async (environmentId) => {
+    const environmentData = await getData(`/api/environment/${environmentId}/data`);
+    console.log(environmentData);
 
     if (environmentData && environmentData.length > 0) {
         const lastValue = environmentData[environmentData.length - 1];
@@ -119,7 +120,7 @@ const checkEnvironment = async () => {
     try {
         const environmentList = await getData('/api/environment');
         if (environmentList && environmentList.length > 0) {
-            await displayEnvironmentStates();
+            await displayEnvironmentStates(environmentList.find(env => env.temperature).id);
             await displayPlants();
         } else {
             content.style.display = 'none';

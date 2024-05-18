@@ -53,9 +53,10 @@ async function displayEnvironmentList() {
         environmentList.forEach(env => {
             const row = document.createElement('tr');
             row.innerHTML = `
+                <td>${env.id}</td>
                 <td>${env.name}</td>
-                <td>${env.temperature ? env.temperature + ' °C': '-'}</td>
-                <td>${env.humidity ? env.humidity + ' %': '-'}</td>
+                <td>${env.temperature ? env.temperature + ' °C' : '-'}</td>
+                <td>${env.humidity ? env.humidity + ' %' : '-'}</td>
             `;
             tableBody.appendChild(row);
         });
@@ -103,50 +104,50 @@ const displayChart = () => {
     new Chart(ctx, {
         type: 'line',
         data: {
-          labels: labels,
-          datasets: [{
-            label: 'Temperature (°C)',
-            data: temperatureData,
-            borderColor: 'rgb(255, 99, 132)',
-            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-            fill: false,
-            yAxisID: 'temperature-y-axis'
-          },
-          {
-            label: 'Humidity (%)',
-            data: humidityData,
-            borderColor: 'rgb(54, 162, 235)',
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            fill: false,
-            yAxisID: 'humidity-y-axis'
-          }]
+            labels: labels,
+            datasets: [{
+                label: 'Temperature (°C)',
+                data: temperatureData,
+                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                fill: false,
+                yAxisID: 'temperature-y-axis'
+            },
+            {
+                label: 'Humidity (%)',
+                data: humidityData,
+                borderColor: 'rgb(54, 162, 235)',
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                fill: false,
+                yAxisID: 'humidity-y-axis'
+            }]
         },
         options: {
-          scales: {
-            x: {
-              scaleLabel: {
-                display: true,
-                labelString: 'Time (Hour)'
-              }
-            },
-            y: {
-              beginAtZero: true,
-              position: 'left',
-              title: {
-                display: true,
-                text: 'Temperature (°C)',
-              },
-              grid: {
-                display: false
-              },
-              ticks: {
-                beginAtZero: true,
-              },
-              stacked: false,
+            scales: {
+                x: {
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Time (Hour)'
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    position: 'left',
+                    title: {
+                        display: true,
+                        text: 'Temperature (°C)',
+                    },
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        beginAtZero: true,
+                    },
+                    stacked: false,
+                }
             }
-          }
         }
-      });
+    });
 }
 
 // To display all environments
